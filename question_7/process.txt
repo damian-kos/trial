@@ -1,0 +1,9 @@
+# Question 7 
+Problem:
+    Didn't have any previous experience with modules for otclient. Didn't know how they work.
+
+How did I manage to overcome a problem:
+    Got some random module, and reversed it so I'd have minimal example.
+    After doing so it was fairly simple to achieve desired result. 
+    As it was mainly math calculations, and redirecting a button back to it's position.
+    Done it as a module, as most of codebase affecting the client was made similar way.

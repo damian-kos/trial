@@ -1,0 +1,12 @@
+Module
+  name: game_dash
+  description: Dash
+  author: Tofame
+  website: -
+  sandboxed: true
+  scripts: [ dash ]
+  autoload: true
+  @onLoad: init()
+  @onUnload: terminate()
+  dependencies:
+    - game_shaders

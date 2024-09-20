@@ -1,0 +1,49 @@
+# Question 6 - Dash ability
+Problem #1:
+    Recreating a movement. I noticed that player during this ability doesn't have movement animation. And that there is no walk animation.
+    It is two step proces, first one which teleports a player by 3 SQMs and second one which teleports also by 3 tiles, but in separate steps. 
+    Also on video character stops on closest obstacle.
+
+How did I manage to overcome a problem:
+    I started with reading source code of otclient and tfs. Found unused `jump` method. Which I wanted to change into a dash. But when doing that I found ExtendedOpcodes.
+    Having them made the rest of the process fairly simple. For movement I used teleportTo and addEvent() which I belive are not most optimal solution as delays between
+    each addEvent are hardcoded. But it allowed me to have good enough base to take on the next step of the task.
+
+Problem #2:
+    Shaders.
+    This task was really tough. I noticed an issue with a shader that creates outlines and clones of the player character appearing behind them. 
+    After looking into it, I realized that fixing this might be too hard for me right now because of the time limit.
+
+    I learned about shader modules made by others. The Otclient from 
+    As Otclient from https://github.com/edubart/otclient doesn't have shader module.
+    I decided to find alternative otclient to try at least recreate a shaders behavior.
+    Found two versions of this module on this client.
+    https://github.com/mehah/otclient
+    https://github.com/OTCv8/otclientv8
+
+How did I manage to overcome a problem:
+    Unfortunately I didn't manage to solve it. 
+
+    I used all time I had left on trial to get a grasp on GSLS as I belive it creates this expected behavior.
+
+    Trying to split ability step by step I've notice:
+        - Clones following a player are render one under each other. 
+        - When player moves by a tree, player is rendered on top of it, not under as it normally would.
+
+    When looking for an information on shaders manipulation I came across outline behavior implementation by another user
+    I decided to use that as I wanted at least test the implementation of loading a shader during ability, and resetting back to default state. 
+    Hence I included the code for outline but my solution is valid only for movement part and loading & unloading a shader. 
+    In `dash.lua` and `extendedopcode.lua`
+    
+    I am fully aware of this not being part of the process, but I still had other part of shaders behavior to complete so decided to use it as reference.
+
+    Other approaches I tried for a player clones: 
+        - I tried to spawn different objects behind the player and remove them later. As creatures or items.
+            * But that won't work as clones are too close to each other, and spawned things would SQM by SQM.
+        - Sending magic effects behind player. But that would mean attaching player's lookType to them, which I don't is possible.
+        - Treating it as a spell, but spells sprites are rendered under a tree so that didn't felt correct.
+
+    The best result I could achieve is under `best_result.png`
+
+    So to summarize this task is unfortunately not finished. I tried to break it down, but with my current experience on this topic I couldn't do it.
+

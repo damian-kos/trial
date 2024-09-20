@@ -1,0 +1,10 @@
+Module
+  name: client_jump_button
+  description: Makes a floating button from right to left, and randomly changes its Y position after crossing left margin or on click
+  author: Kossano
+  website: damiankosowski.com
+  sandboxed: true
+  scripts: [ client_jump_button ]
+  autoload: true
+  @onLoad: init()
+  @onUnload: terminate()

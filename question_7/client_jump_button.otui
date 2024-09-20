@@ -1,0 +1,8 @@
+MainWindow
+  id: clientJump
+  size: 450 450
+
+  Button
+    id: jumpBtn
+    text: Jump!
+    @onClick: modules.client_jump_button.moveButtonToLeftEdge()

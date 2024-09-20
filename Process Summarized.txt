@@ -1,0 +1,80 @@
+# Enviroment setup
+Problem:
+    For server 1.4.2 with files from 1.4.2 release used fmt:: is version 9.* if following current github repository and README by default installed will be at least fmt:: 10.0+.
+    This is was causing problems on build. 
+
+How did I manage to overcome a problem:
+    Googled an issue, found multiple solutions.
+    Managed to fix it with this commit. Which was merged to tfs later.
+    https://github.com/otland/forgottenserver/pull/4491/commits/9bd9856b8d461ab03b566766e42d925c02a343d8
+
+
+
+Process for steps below are also included in their respective folders.
+
+
+# Question 5 - Frigo spell
+Problem:
+    On https://github.com/edubart/otclient
+    I experienced an issue where I spells using CONST_ME_ICETORNADO weren't rendering properly on a map.
+    It was even happening on clean build.
+    Trying to reproduce a behavior of the spell, with  small and big tornados as on trial video, wasn't possible.
+
+How did I manage to overcome a problem:
+    I build an OTCv8 from different repository, and CONST_ME_ICETORNADO were rendering better but still not as it should - even on clean builds.
+    So I've decided to reporduce the spell on exact same SQM, as it is on trial video. And it worked.
+    Went back to https://github.com/edubart/otclient client, and it worked on that SQM as well. However on other SQMs spells using 
+    CONST_ME_ICETORNADO are still not consistent.
+
+# Question 6 - Dash ability
+Problem #1:
+    Recreating a movement. I noticed that player's during this ability doesn't have movement animation. And that the move process is not some quick teleports by given distance.
+    It is two step proces, first one which moves a player by 3 SQMs and second one which moves also by 3 tiles, but by separate steps. Also on video character stops on closest obstacle.
+
+How did I manage to overcome a problem:
+    I started with reading source code of otclient and tfs. Found unused `jump` method. Which I wanted to change into a dash. But when doing that I found ExtendedOpcodes.
+    Having them made the rest of the process fairly simple. For movement I used teleportTo and addEvent() which I belive are not most optimal solution.
+
+Problem #2:
+    This one is the most challenging one. Can't grasp what's happening there.
+    I can see an outline shader which, and player clones behind character.
+    After gathering some information on topic, I realised that this task might be beyond my reach in given time frame.
+    Doing so I found out about shader modules implemented by other users.
+    As Otclient from https://github.com/edubart/otclient doesn't have shader module.
+    I decided to find alternative otclient to try at least recreate a shaders behavior.
+    Found two versions of this module on this client.
+    https://github.com/mehah/otclient
+    https://github.com/OTCv8/otclientv8
+
+How did I manage to overcome a problem:
+    Unfortunately I didn't manage to solve it. 
+    I used all time I had left on trial to get a grasp on GSLS as I belive it creates this expected behavior.
+
+    Trying to split ability step by step I've notice:
+        - Clones following a player are render one under each other. 
+        - When player moves by tree, player is rendered on top of it, not under as it normally would.
+
+    For outline I managed to find a solution and used someone elses code, as I wanted at least test the implementation 
+    of loading a shader during ability, and resetting back to default state. 
+    Hence I included the code for outline but my solution is valid only for movement part and loading & unloading a shader. 
+    In `dash.lua` and `extendedopcode.lua`
+
+    Other approaches I tried for a player clones: 
+        - I tried to spawn different objects behind the player and remove them later. As creatures or items.
+            * But that won't work as clones are too close to each other, and spawned things would SQM by SQM.
+        - Sending magic effects behind player. But that would mean attaching player's lookType to them, which I don't is possible.
+        - Treating it as a spell, but spells sprites are rendered under a tree so that didn't felt correct.
+
+    However, trying to use whole time available I tried to get the best possible grasp on GSLS.
+    The best I could achieve is under `best_result.png`
+
+    So to summarize this task is unfortunately not finished.
+
+# Question 7 
+Problem:
+    Didn't have any previous experience with modules for otclient. Didn't know how they work.
+
+How did I manage to overcome a problem:
+    Got some random module, and reversed it so I'd have minimal example.
+    After doing so it was fairly simple to achieve desired result.
+

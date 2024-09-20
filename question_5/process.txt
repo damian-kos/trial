@@ -1,0 +1,12 @@
+# Question 5 - Frigo spell
+Problem:
+    On https://github.com/edubart/otclient
+    I experienced an issue where I spells using CONST_ME_ICETORNADO weren't rendering properly on a map.
+    It was even happening on clean build.
+    Trying to reproduce a behavior of the spell, with  small and big tornados as on trial video, wasn't possible.
+
+How did I manage to overcome a problem:
+    I build an OTCv8 from different repository, and CONST_ME_ICETORNADO were rendering better but still not as it should - even on clean builds.
+    So I've decided to reporduce the spell on exact same SQM, as it is on trial video. And it worked.
+    Went back to https://github.com/edubart/otclient client, and it worked on that SQM as well. However on other SQMs spells using 
+    CONST_ME_ICETORNADO are still not consistent.
