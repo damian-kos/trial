@@ -33,7 +33,7 @@ function removePartyMember(playerId, memberName)
    end
 
    -- No party member matched the provided name; failure to remove.
-   return false
+   -- return false
 end
 
 
